@@ -37,6 +37,11 @@ const typedRouter = new TypedRouter()
                         return error(409, 'E-mail already used')
                     }
 
+                    // Vérifier si le mot de passe n'est pas trop court
+                    if (password.length < 8) {
+                        return error(400, 'Too short password')
+                    }
+
                     // Vérifier si l'utilisateur existe déjà
                     const userWithSameUsername = await prisma.user.findFirst({
                         select: {
