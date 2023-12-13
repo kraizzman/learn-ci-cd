@@ -15,10 +15,10 @@ jobs:
     steps:
       - checkout
       - run:
-          command: "npm install"
+          command: npm install
       - run:
           name: "Backend lint"
-          command: "npm run lint-check"
+          command: npm run lint-check
           working_directory: backend/
 
 # Orchestrate jobs using workflows
