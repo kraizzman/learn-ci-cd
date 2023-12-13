@@ -5,6 +5,20 @@ version: 2.1
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/configuration-reference/#jobs
 jobs:
+  backend-unit-tests:
+    docker:
+        - image: node:lts
+    steps:
+      - checkout
+      - run:
+          command: "npm install"
+      - run:
+          command: "npm run db-install"
+          working_directory: backend/
+      - run:
+          command: "npm run unit-tests"
+          working_directory: backend/
+
   backend-type-check:
     docker:
         - image: node:lts
@@ -42,3 +56,4 @@ workflows:
     jobs:
       - backend-lint
       - backend-type-check
+      - backend-unit-tests
